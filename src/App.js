@@ -1,23 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
-
+import LocaleContext from "./LocalContext";
+import Blog from "./Blog";
+import Blog2 from "./Blog2";
+import React, {useState} from 'react';
 function App() {
+
+const [locale,setLocale] = useState('en');
+const [locale2,setLocale2] = useState('ger');
+const toggleLocale =() =>{
+    
+setLocale((locale) => {
+
+return locale ==='en'? 'ar' : 'en';
+
+});
+
+}
+  const toggleLocale2 =() =>{
+    
+setLocale2((locale2) => {
+
+return locale2 ==='ger'? 'rus' : 'ger';
+
+});
+
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LocaleContext.Provider value={{ locale, locale2, toggleLocale2, toggleLocale}}>
+
+        <Blog />
+        <Blog2 />
+
+      </LocaleContext.Provider>
     </div>
   );
 }
